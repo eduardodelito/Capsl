@@ -8,6 +8,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
 import com.enaz.capsl.common.fragment.BaseFragment
 import com.enaz.capsl.common.util.afterTextChanged
+import com.enaz.capsl.common.util.hideKeyboard
 import com.enaz.capsl.common.util.reObserve
 import com.enaz.capsl.main.BR
 import com.enaz.capsl.main.R
@@ -119,6 +120,7 @@ class CreateUserFragment : BaseFragment<CreateUserFragmentBinding, CreateUserVie
                         listener?.navigateToMainScreen()
                     }
                     clearFields()
+                    hideKeyboard()
                 }
             }
         }

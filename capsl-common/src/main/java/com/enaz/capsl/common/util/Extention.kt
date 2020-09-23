@@ -1,8 +1,13 @@
 package com.enaz.capsl.common.util
 
+import android.app.Activity
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -42,4 +47,26 @@ fun <T : Any, L : LiveData<T>> LifecycleOwner.unObserve(liveData: L) = liveData.
 inline fun <T : Any, L : LiveData<T>> LifecycleOwner.reObserve(liveData: L, crossinline body: (T?) -> Unit) {
     unObserve(liveData)
     observe(liveData, body)
+}
+
+/**
+ * Hide Keyboard in the Fragment.
+ */
+fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard(it) }
+}
+
+/**
+ * Hide Keyboard in the Activity.
+ */
+fun Activity.hideKeyboard() {
+    hideKeyboard(currentFocus ?: View(this))
+}
+
+/**
+ * Hide keyboard method.
+ */
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
