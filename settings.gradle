@@ -1,0 +1,2 @@
+include ':app', ':capsl-ui', ':capsl-common', ':capsl-db'
+rootProject.name = "Capsl"

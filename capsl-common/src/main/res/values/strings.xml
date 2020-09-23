@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="prompt_firstname">First Name</string>
+    <string name="prompt_lastname">Last Name</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username.</string>
+    <string name="invalid_password">Password must be >5 characters.</string>
+    <string name="login_failed">"Login failed."</string>
+    <string name="login_invalid">"Invalid user."</string>
+    <string name="insert_invalid">"Unable to save user, please try again."</string>
+</resources>

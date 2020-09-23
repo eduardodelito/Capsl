@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Capsl</string>
+    <string name="title_live">Live</string>
+    <string name="title_users">Users</string>
+    <string name="title_support">Support</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_activity_login">Login</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/capsl_navigation"
+    app:startDestination="@id/navigation_live_stream">
+
+    <fragment
+        android:id="@+id/navigation_live_stream"
+        android:name="com.enaz.capsl.main.fragment.LiveStreamFragment"
+        android:label="LiveStreamFragment" />
+    <fragment
+        android:id="@+id/navigation_users"
+        android:name="com.enaz.capsl.main.fragment.UsersFragment"
+        android:label="UsersFragment" />
+    <fragment
+        android:id="@+id/navigation_support"
+        android:name="com.enaz.capsl.main.fragment.SupportFragment"
+        android:label="SupportFragment" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.enaz.capsl.main.fragment.SettingsFragment"
+        android:label="SettingsFragment" />
+</navigation>

@@ -1,0 +1,34 @@
+import dependencies.*
+/**
+ * Gradle file that is shared to all android modules
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/core-dependencies.gradle"
+
+android {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'org.jetbrains.kotlin' && requested.name == 'kotlin-reflect') {
+                details.useVersion Versions.kotlin_version
+            }
+        }
+    }
+
+    buildFeatures{
+        dataBinding = true
+    }
+}
