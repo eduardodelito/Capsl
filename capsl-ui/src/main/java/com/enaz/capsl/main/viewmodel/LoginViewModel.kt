@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -61,30 +62,25 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
                         )
                     )
                 }
-            } catch (e: Exception) {
+            } catch (e: IOException) {
                 loginFormState.postValue(LoginResult(error = R.string.login_failed))
             }
         }
     }
 
     fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
+        if (!isValueValid(username)) {
             loginFormState.postValue(LoginForm(usernameError = R.string.invalid_username))
-        } else if (!isPasswordValid(password)) {
+        } else if (!isValueValid(password)) {
             loginFormState.postValue(LoginForm(passwordError = R.string.invalid_password))
         } else {
             loginFormState.postValue(LoginForm(isDataValid = true))
         }
     }
 
-    // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
-        return username.length > 5
-    }
-
-    // A placeholder password validation check
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+    // A placeholder value validation check
+    private fun isValueValid(value: String): Boolean {
+        return value.length > 5
     }
 
     fun insertUser(username: String, password: String) {

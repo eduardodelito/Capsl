@@ -97,9 +97,9 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginViewModel>() {
                     if (state.success.isRegister) {
                         listener?.navigateToMainScreen()
                     } else {
-                        clearFields()
                         listener?.navigateToCreateUserScreen(requireView())
                     }
+                    clearFields()
                 }
             }
         }
@@ -110,8 +110,8 @@ class LoginFragment : BaseFragment<LoginFragmentBinding, LoginViewModel>() {
     }
 
     private fun clearFields() {
-        username.text.clear()
-        password.text.clear()
+        username.text?.clear()
+        password.text?.clear()
     }
 
     override fun onAttach(context: Context) {
