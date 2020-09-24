@@ -24,7 +24,6 @@
             android:layout_marginTop="@dimen/setting_btn_margin_top"
             android:layout_marginEnd="@dimen/setting_btn_margin_right"
             android:layout_marginRight="@dimen/setting_btn_margin_right"
-            android:onClick="onSettingClicked"
             android:src="@drawable/btn_setting" />
 
         <RelativeLayout

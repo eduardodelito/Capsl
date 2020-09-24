@@ -92,6 +92,9 @@ class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
     }
 
     override fun initViews() {
+        setting_button.setOnClickListener {
+            //Do nothing for now
+        }
         start_broadcast_button.setOnClickListener { checkPermission() }
         topic_edit.afterTextChanged {
             viewModel.topicEditTextChanged(it)
