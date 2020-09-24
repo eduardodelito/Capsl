@@ -25,9 +25,6 @@
         <item>1280x720</item>
     </string-array>
 
-    <!-- Live Activity -->
-    <string name="fake_user_name" translatable="false">Shakespeare</string>
-
     <!-- Role Choose Activity -->
     <string name="select_role_title">Please choose your role</string>
     <string name="select_role_broadcaster">Broadcaster</string>

@@ -9,7 +9,7 @@ import java.io.File
  * Created by eduardo.delito on 9/24/20.
  */
 
-private val LOG_FOLDER_NAME: String? = "log"
+private val LOG_FOLDER_NAME: String = "log"
 private const val LOG_FILE_NAME = "agora-rtc.log"
 
 fun initializeLogFile(context: Context): String? {

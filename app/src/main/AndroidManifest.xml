@@ -11,9 +11,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    // Add the following permission if your scenario involves reading the external storage:
+     <!--Add the following permission if your scenario involves reading the external storage:-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    // For devices running Android 10.0 or later, you also need to add the following permission:
+     <!--For devices running Android 10.0 or later, you also need to add the following permission:-->
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
     <application

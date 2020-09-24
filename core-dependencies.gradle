@@ -48,13 +48,12 @@ dependencies {
     implementation Libs.Android.navigationFragmentKtx
     implementation Libs.Android.navigationUIKtx
     implementation Libs.Android.materialDesign
+    implementation Libs.Android.annotation
 
 //    implementation Libs.Android.lifecycleCommon
 //    implementation Libs.Android.lifecycleRuntime
-//    implementation Libs.Android.lifecycleExtensions
 //    implementation Libs.Android.lifecycleLivedataKtx
-//    implementation Libs.Android.lifecycle_viewmodel_ktx
-//
+    
     implementation Libs.Google.core
     implementation Libs.Google.android
     implementation Libs.Google.androidSupport

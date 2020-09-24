@@ -18,11 +18,12 @@ object Versions {
     const val gradle = "4.0.1"
     const val core_ktx = "1.3.1"
     const val appcompat = "1.2.0"
-    const val constraint_layout = "1.1.3"
+    const val constraint_layout = "2.0.1"
     const val legacySupport = "1.0.0"
     const val navigation = "2.3.0"
-    const val materialDesign = "1.2.0-alpha03"
+    const val materialDesign = "1.2.1"
     const val lifecycleExtensions = "2.2.0"
+    const val annotation = "1.1.0"
 
     const val dagger = "2.25.3"
     const val play_services_maps = "17.0.0"
@@ -52,6 +53,7 @@ object Libs {
         const val legacySupport = "androidx.legacy:legacy-support-v4:${Versions.legacySupport}"
         const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExtensions}"
         const val lifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleExtensions}"
+        const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
         // Navigation
         const val navigationPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
         const val navigationFragment = "androidx.navigation:navigation-fragment:${Versions.navigation}"
