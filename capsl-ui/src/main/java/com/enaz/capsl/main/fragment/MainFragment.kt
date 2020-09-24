@@ -1,25 +1,25 @@
 package com.enaz.capsl.main.fragment
 
 import android.Manifest
-import android.animation.Animator
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewTreeObserver
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.enaz.capsl.common.fragment.RtcBaseFragment
 import com.enaz.capsl.common.util.afterTextChanged
+import com.enaz.capsl.common.util.hideKeyboard
 import com.enaz.capsl.common.util.reObserve
 import com.enaz.capsl.main.BR
 import com.enaz.capsl.main.R
 import com.enaz.capsl.main.databinding.MainFragmentBinding
-import com.enaz.capsl.main.model.MainForm
 import com.enaz.capsl.main.model.MainFormState
+import com.enaz.capsl.main.model.MainLogoForm
+import com.enaz.capsl.main.model.TextWatcherForm
 import com.enaz.capsl.main.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
@@ -27,8 +27,6 @@ import javax.inject.Inject
 class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
 
     private var listener: MainFragmentListener? = null
-
-    private val TAG = LiveStreamFragment::class.java.simpleName
 
     companion object {
         private const val MIN_INPUT_METHOD_HEIGHT = 200
@@ -57,26 +55,7 @@ class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
 
     override fun getBindingVariable() = BR.mainViewModel
 
-    private val mLogoAnimListener: Animator.AnimatorListener = object : Animator.AnimatorListener {
-        override fun onAnimationStart(animator: Animator) {
-            // Do nothing
-        }
-
-        override fun onAnimationEnd(animator: Animator) {
-            main_logo.visibility = View.VISIBLE
-        }
-
-        override fun onAnimationCancel(animator: Animator) {
-            main_logo.visibility = View.VISIBLE
-        }
-
-        override fun onAnimationRepeat(animator: Animator) {
-            // Do nothing
-        }
-    }
-
-    private val mLayoutObserverListener =
-        ViewTreeObserver.OnGlobalLayoutListener { checkInputMethodWindowState() }
+    private val mLayoutObserverListener = ViewTreeObserver.OnGlobalLayoutListener { checkInputMethodWindowState() }
 
     private fun checkInputMethodWindowState() {
         activity?.window?.decorView?.rootView?.getWindowVisibleDisplayFrame(mVisibleRect)
@@ -106,7 +85,7 @@ class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
         } else if (main_logo.visibility != View.VISIBLE) {
             main_logo.measuredHeight.toFloat().let {
                 middle_layout.animate()?.translationYBy(it)
-                    ?.setDuration(ANIM_DURATION.toLong())?.setListener(mLogoAnimListener)
+                    ?.setDuration(ANIM_DURATION.toLong())?.setListener(viewModel.mLogoAnimListener)
                     ?.start()
             }
         }
@@ -129,47 +108,10 @@ class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
 
     private fun onMainStateChanged(state: MainFormState?) {
         when(state) {
-            is MainForm -> {
-                start_broadcast_button.isEnabled = state.isEnabled
-            }
+            is TextWatcherForm -> start_broadcast_button.isEnabled = state.isEnabled
+            is MainLogoForm -> main_logo.visibility = state.mainLogoVisible
         }
     }
-
-    //    @Override
-//    protected void onGlobalLayoutCompleted() {
-//        adjustViewPositions();
-//    }
-
-//    private fun adjustViewPositions() {
-//        // Setting btn move downward away the status bar
-//        var param = setting_button.layoutParams as RelativeLayout.LayoutParams
-//        param.topMargin += mStatusBarHeight
-//        setting_button.layoutParams = param
-//
-//        // Logo is 0.48 times the screen width
-//        param = main_logo.layoutParams as RelativeLayout.LayoutParams
-//        val size = (mDisplayMetrics.widthPixels * 0.48) as Int
-//        param.width = size
-//        param.height = size
-//        main_logo.layoutParams = param
-//
-//        // Bottom margin of the main body should be two times it's top margin.
-//        param = middle_layout.layoutParams as RelativeLayout.LayoutParams
-//        param.topMargin = (mDisplayMetrics.heightPixels -
-//                middle_layout.measuredHeight - mStatusBarHeight) / 3
-//        middle_layout.layoutParams = param
-//        mBodyDefaultMarginTop = param.topMargin
-//
-//        // The width of the start button is roughly 0.72
-//        // times the width of the screen
-//        param = start_broadcast_button.layoutParams as RelativeLayout.LayoutParams
-//        param.width = (mDisplayMetrics.widthPixels * 0.72).toInt()
-//        start_broadcast_button.layoutParams = param
-//    }
-
-//    fun onSettingClicked(view: View) {
-//
-//    }
 
     private fun checkPermission() {
         var granted = true
@@ -216,23 +158,12 @@ class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
     }
 
     private fun resetLayoutAndForward() {
-        closeImeDialogIfNeeded()
+        hideKeyboard()
         gotoRoleActivity()
     }
 
-    private fun closeImeDialogIfNeeded() {
-        val manager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        manager.hideSoftInputFromWindow(
-            topic_edit.windowToken,
-            InputMethodManager.HIDE_NOT_ALWAYS
-        )
-    }
-
     private fun gotoRoleActivity() {
-//        Intent intent = new Intent(MainActivity.this, RoleActivity.class);
-//        String room = mTopicEdit.getText().toString();
-//        config().setChannelName(room);
-//        startActivity(intent);
+        mGlobalConfig.setChannelName(topic_edit.text.toString())
         listener?.navigateToRoleScreen(requireView())
     }
 
@@ -248,7 +179,7 @@ class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
 
     private fun resetUI() {
         resetLogo()
-        closeImeDialogIfNeeded()
+        hideKeyboard()
     }
 
     private fun resetLogo() {
