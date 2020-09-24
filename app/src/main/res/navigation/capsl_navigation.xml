@@ -2,7 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/capsl_navigation"
-    app:startDestination="@id/navigation_live_stream">
+    app:startDestination="@id/navigation_main">
+
+    <fragment
+        android:id="@+id/navigation_main"
+        android:name="com.enaz.capsl.main.fragment.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_navigation_main_to_navigation_role"
+            app:destination="@id/navigation_role"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_live_stream"
@@ -20,4 +33,16 @@
         android:id="@+id/navigation_settings"
         android:name="com.enaz.capsl.main.fragment.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/navigation_role"
+        android:name="com.enaz.capsl.main.fragment.RoleFragment"
+        android:label="RoleFragment" >
+        <action
+            android:id="@+id/action_navigation_role_to_navigation_live_stream"
+            app:destination="@id/navigation_live_stream"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 </navigation>

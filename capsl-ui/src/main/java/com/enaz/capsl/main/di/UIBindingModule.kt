@@ -1,14 +1,8 @@
 package com.enaz.capsl.main.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.enaz.capsl.main.fragment.LiveStreamFragment
-import com.enaz.capsl.main.fragment.SettingsFragment
-import com.enaz.capsl.main.fragment.SupportFragment
-import com.enaz.capsl.main.fragment.UsersFragment
-import com.enaz.capsl.main.viewmodel.LiveStreamViewModel
-import com.enaz.capsl.main.viewmodel.SettingsViewModel
-import com.enaz.capsl.main.viewmodel.SupportViewModel
-import com.enaz.capsl.main.viewmodel.UsersViewModel
+import com.enaz.capsl.main.fragment.*
+import com.enaz.capsl.main.viewmodel.*
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -65,5 +59,29 @@ abstract class UIBindingModule {
             factory: ViewModelProvider.Factory,
             target: SettingsFragment
         ) = ViewModelProvider(target, factory).get(SettingsViewModel::class.java)
+    }
+
+    @ContributesAndroidInjector(modules = [InjectMainViewModelModule::class])
+    abstract fun bindMainFragment(): MainFragment
+
+    @Module
+    class InjectMainViewModelModule {
+        @Provides
+        internal fun provideMainViewModel(
+            factory: ViewModelProvider.Factory,
+            target: MainFragment
+        ) = ViewModelProvider(target, factory).get(MainViewModel::class.java)
+    }
+
+    @ContributesAndroidInjector(modules = [InjectRoleViewModelModule::class])
+    abstract fun bindRoleFragment(): RoleFragment
+
+    @Module
+    class InjectRoleViewModelModule {
+        @Provides
+        internal fun provideRoleViewModel(
+            factory: ViewModelProvider.Factory,
+            target: RoleFragment
+        ) = ViewModelProvider(target, factory).get(RoleViewModel::class.java)
     }
 }

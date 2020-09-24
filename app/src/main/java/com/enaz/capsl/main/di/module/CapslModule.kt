@@ -1,5 +1,6 @@
 package com.enaz.capsl.main.di.module
 
+import com.enaz.capsl.common.di.CommonModule
 import com.enaz.capsl.db.di.DBModule
 import dagger.Module
 
@@ -8,7 +9,8 @@ import dagger.Module
  */
 @Module(
     includes = [
-        DBModule::class
+        DBModule::class,
+        CommonModule::class
     ]
 )
 class CapslModule

@@ -1,13 +1,13 @@
 package com.enaz.capsl.main.fragment
 
-import com.enaz.capsl.common.fragment.BaseFragment
+import com.enaz.capsl.common.fragment.RtcBaseFragment
 import com.enaz.capsl.main.BR
 import com.enaz.capsl.main.R
 import com.enaz.capsl.main.databinding.LiveStreamFragmentBinding
 import com.enaz.capsl.main.viewmodel.LiveStreamViewModel
 import javax.inject.Inject
 
-class LiveStreamFragment : BaseFragment<LiveStreamFragmentBinding, LiveStreamViewModel>() {
+class LiveStreamFragment : RtcBaseFragment<LiveStreamFragmentBinding, LiveStreamViewModel>() {
 
     companion object {
         fun newInstance() = LiveStreamFragment()
@@ -21,8 +21,15 @@ class LiveStreamFragment : BaseFragment<LiveStreamFragmentBinding, LiveStreamVie
     override fun getBindingVariable() = BR.liveStreamViewModel
 
     override fun initViews() {
+        initLiveStream()
     }
 
     override fun subscribeUi() {
+        
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        destroy()
     }
 }

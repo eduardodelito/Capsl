@@ -2,10 +2,7 @@ package com.enaz.capsl.main.di
 
 import androidx.lifecycle.ViewModel
 import com.enaz.capsl.common.viewmodel.ViewModelKey
-import com.enaz.capsl.main.viewmodel.LiveStreamViewModel
-import com.enaz.capsl.main.viewmodel.SettingsViewModel
-import com.enaz.capsl.main.viewmodel.SupportViewModel
-import com.enaz.capsl.main.viewmodel.UsersViewModel
+import com.enaz.capsl.main.viewmodel.*
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
@@ -35,4 +32,14 @@ class UIViewModelModule {
     @IntoMap
     @ViewModelKey(SettingsViewModel::class)
     fun provideSettingsViewModel(): ViewModel = SettingsViewModel()
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    fun provideMainViewModel(): ViewModel = MainViewModel()
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(RoleViewModel::class)
+    fun provideRoleViewModel(): ViewModel = RoleViewModel()
 }

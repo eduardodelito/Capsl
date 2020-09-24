@@ -6,7 +6,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
-import com.enaz.capsl.common.fragment.BaseFragment
+import com.enaz.capsl.common.fragment.PreMainBaseFragment
 import com.enaz.capsl.common.util.afterTextChanged
 import com.enaz.capsl.common.util.hideKeyboard
 import com.enaz.capsl.common.util.reObserve
@@ -20,7 +20,7 @@ import com.enaz.capsl.main.viewmodel.CreateUserViewModel
 import kotlinx.android.synthetic.main.create_user_fragment.*
 import javax.inject.Inject
 
-class CreateUserFragment : BaseFragment<CreateUserFragmentBinding, CreateUserViewModel>() {
+class CreateUserFragment : PreMainBaseFragment<CreateUserFragmentBinding, CreateUserViewModel>() {
 
     private var listener: CreateUserFragmentListener? = null
 

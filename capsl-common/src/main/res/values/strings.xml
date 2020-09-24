@@ -16,4 +16,8 @@
     <string name="login_invalid">"Invalid user."</string>
     <string name="insert_invalid">"Unable to save user, please try again."</string>
     <string name="registration_failed">"Registration failed."</string>
+
+    <string name="private_app_id" translatable="false">812c19249c6c48c8a9d4a67dade4ceda</string>
+    <string name="agora_access_token">006812c19249c6c48c8a9d4a67dade4cedaIACixMSrwrNuxjqDpsL1m0Gp6F/X0ehSn2Wk9R2Wv4dle/AFzY8AAAAAEAAA4UnYqDxjXwEAAQB3PmNf</string>
+
 </resources>

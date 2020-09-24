@@ -1,6 +1,7 @@
 package com.enaz.capsl.main.di.component
 
 import android.app.Application
+import com.enaz.capsl.common.di.CommonModule
 import com.enaz.capsl.db.di.DBModule
 import com.enaz.capsl.main.di.module.ActivityBindingModule
 import com.enaz.capsl.main.di.module.CapslModule
@@ -28,6 +29,7 @@ interface CapslComponent : AndroidInjector<CapslApplication> {
         @BindsInstance
         fun application(application: Application): Builder
         fun database(dbModule: DBModule): Builder
+        fun common(commonModule: CommonModule): Builder
         fun build(): CapslComponent
     }
 }

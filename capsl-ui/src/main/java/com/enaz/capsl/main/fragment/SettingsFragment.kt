@@ -1,13 +1,13 @@
 package com.enaz.capsl.main.fragment
 
-import com.enaz.capsl.common.fragment.BaseFragment
+import com.enaz.capsl.common.fragment.RtcBaseFragment
 import com.enaz.capsl.main.BR
 import com.enaz.capsl.main.R
 import com.enaz.capsl.main.databinding.SettingsFragmentBinding
 import com.enaz.capsl.main.viewmodel.SettingsViewModel
 import javax.inject.Inject
 
-class SettingsFragment : BaseFragment<SettingsFragmentBinding, SettingsViewModel>() {
+class SettingsFragment : RtcBaseFragment<SettingsFragmentBinding, SettingsViewModel>() {
 
     companion object {
         fun newInstance() = SettingsFragment()
