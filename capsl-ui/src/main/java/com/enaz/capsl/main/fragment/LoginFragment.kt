@@ -7,7 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import com.enaz.capsl.common.fragment.PreMainBaseFragment
+import com.enaz.capsl.common.fragment.RtcBaseFragment
 import com.enaz.capsl.common.util.afterTextChanged
 import com.enaz.capsl.common.util.hideKeyboard
 import com.enaz.capsl.common.util.reObserve
@@ -21,7 +21,7 @@ import com.enaz.capsl.main.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
 import javax.inject.Inject
 
-class LoginFragment : PreMainBaseFragment<LoginFragmentBinding, LoginViewModel>() {
+class LoginFragment : RtcBaseFragment<LoginFragmentBinding, LoginViewModel>() {
 
     private var listener: LoginFragmentListener? = null
 

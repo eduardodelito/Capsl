@@ -5,9 +5,7 @@ import android.animation.Animator
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Rect
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
@@ -15,9 +13,13 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.enaz.capsl.common.fragment.RtcBaseFragment
+import com.enaz.capsl.common.util.afterTextChanged
+import com.enaz.capsl.common.util.reObserve
 import com.enaz.capsl.main.BR
 import com.enaz.capsl.main.R
 import com.enaz.capsl.main.databinding.MainFragmentBinding
+import com.enaz.capsl.main.model.MainForm
+import com.enaz.capsl.main.model.MainFormState
 import com.enaz.capsl.main.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
@@ -73,20 +75,6 @@ class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
         }
     }
 
-    private val mTextWatcher: TextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            // Do nothing
-        }
-
-        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            // Do nothing
-        }
-
-        override fun afterTextChanged(editable: Editable) {
-            start_broadcast_button.isEnabled = !TextUtils.isEmpty(editable)
-        }
-    }
-
     private val mLayoutObserverListener =
         ViewTreeObserver.OnGlobalLayoutListener { checkInputMethodWindowState() }
 
@@ -126,12 +114,25 @@ class MainFragment : RtcBaseFragment<MainFragmentBinding, MainViewModel>() {
 
     override fun initViews() {
         start_broadcast_button.setOnClickListener { checkPermission() }
-        topic_edit.addTextChangedListener(mTextWatcher)
+        topic_edit.afterTextChanged {
+            viewModel.topicEditTextChanged(it)
+        }
 
         if (TextUtils.isEmpty(topic_edit.text)) start_broadcast_button.isEnabled = false
     }
 
     override fun subscribeUi() {
+        with(viewModel) {
+            reObserve(getMainLiveData(), ::onMainStateChanged)
+        }
+    }
+
+    private fun onMainStateChanged(state: MainFormState?) {
+        when(state) {
+            is MainForm -> {
+                start_broadcast_button.isEnabled = state.isEnabled
+            }
+        }
     }
 
     //    @Override

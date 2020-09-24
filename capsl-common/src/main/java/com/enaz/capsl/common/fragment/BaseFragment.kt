@@ -23,7 +23,7 @@ abstract class BaseFragment: DaggerFragment(), EventHandler {
     protected var mDisplayMetrics = DisplayMetrics()
     private var mStatusBarHeight = 0
 
-    //TODO: fix RtcEngine injection - possible error, ongoing work
+    @Inject
     lateinit var mRtcEngine: RtcEngine
 
     @Inject

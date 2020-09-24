@@ -20,8 +20,6 @@ import javax.inject.Singleton
  */
 @Module
 class CommonModule(private val context: Context, private val application: Application) {
-    private var mRtcEngine: RtcEngine? = null
-    private val mHandler = AgoraEventHandler()
     @Provides
     @Singleton
     fun provideCommonConfig(): CommonConfig {
@@ -30,22 +28,23 @@ class CommonModule(private val context: Context, private val application: Applic
 
     @Provides
     @Singleton
-    fun provideAgoraEventHandler() : AgoraEventHandler = mHandler
+    fun provideAgoraEventHandler() : AgoraEventHandler = AgoraEventHandler()
 
     @Provides
     @Singleton
-    fun provideRtcEngine(): RtcEngine? {
+    fun provideRtcEngine(mHandler: AgoraEventHandler): RtcEngine {
+        var mRtcEngine = RtcEngine.create(
+            context,
+            context.getString(R.string.private_app_id),
+            mHandler
+        )
          try {
-             mRtcEngine = RtcEngine.create(
-                 context,
-                 context.getString(R.string.private_app_id),
-                 mHandler
-             )
              // Sets the channel profile of the Agora RtcEngine.
-             // The Agora RtcEngine differentiates channel profiles and applies different optimization algorithms accordingly. For example, it prioritizes smoothness and low latency for a video call, and prioritizes video quality for a video broadcast.
-             mRtcEngine?.setChannelProfile(Constants.CHANNEL_PROFILE_LIVE_BROADCASTING)
-             mRtcEngine?.enableVideo()
-             mRtcEngine?.setLogFile(initializeLogFile(context))
+             // The Agora RtcEngine differentiates channel profiles and applies different optimization algorithms accordingly.
+             // For example, it prioritizes smoothness and low latency for a video call, and prioritizes video quality for a video broadcast.
+             mRtcEngine.setChannelProfile(Constants.CHANNEL_PROFILE_LIVE_BROADCASTING)
+             mRtcEngine.enableVideo()
+             mRtcEngine.setLogFile(initializeLogFile(context))
         } catch (e: Exception) {
             e.printStackTrace()
         }

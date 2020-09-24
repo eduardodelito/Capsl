@@ -111,7 +111,7 @@ abstract class RtcBaseFragment<T : ViewDataBinding, V : BaseViewModel> : BaseFra
         // 2. One token is only valid for the channel name and uid that
         // you use to generate this token.
         var token: String? = getString(R.string.agora_access_token)
-        if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
+        if (TextUtils.isEmpty(token)) {
             token = null // default, no token
         }
         mRtcEngine.joinChannel(token, mGlobalConfig.getChannelName(), "", 0)

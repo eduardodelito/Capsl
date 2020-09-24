@@ -28,8 +28,8 @@ interface CapslComponent : AndroidInjector<CapslApplication> {
     interface Builder {
         @BindsInstance
         fun application(application: Application): Builder
-        fun database(dbModule: DBModule): Builder
         fun common(commonModule: CommonModule): Builder
+        fun database(dbModule: DBModule): Builder
         fun build(): CapslComponent
     }
 }

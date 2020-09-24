@@ -15,8 +15,8 @@ class CapslApplication : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerCapslComponent.builder()
             .application(this)
-            .database(DBModule(this))
             .common(CommonModule(applicationContext, this))
+            .database(DBModule(this))
             .build()
     }
 
